@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="P2PShare.Views.MainViewPage"
+             Title="Main">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Styles/DarkStyle.css"/>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView Margin="20">
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Device Name" Grid.Row="0" Grid.Column="0"/>
+                    <Editor x:Name="DeviceName" IsEnabled="False" Text="Processing" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Storage Permission"  Grid.Row="1" Grid.Column="0"/>
+                    <Editor x:Name="StorageState" IsEnabled="False" Text="Disabled" Grid.Row="1" Grid.Column="1"/>
+                    <Button x:Name="Storage" Text="Enabled" Grid.Row="1" Grid.Column="2" Clicked="Storage_Clicked" />
+                </Grid>
+                <ListView x:Name="AppsView" HasUnevenRows="true">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Tapped="ViewCell_Tapped">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                                    <Image WidthRequest="50" HeightRequest="50" Source="{Binding Image}" Margin="10" />
+                                    <Label Text="{Binding Name}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

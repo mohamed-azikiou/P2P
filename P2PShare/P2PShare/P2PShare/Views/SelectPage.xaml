@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P2PShare.SelectPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:cardView="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+    xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:popuplayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    xmlns:classes="clr-namespace:P2PShare.Classes">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Styles/DarkStyle.css" />
+        <ResourceDictionary>
+            <popuplayout:SfPopupLayout
+                x:Key="popup"
+                x:Name="popup"
+                RelativePosition="AlignTop"
+                RelativeView="{x:Reference AddBtn}">
+                <popuplayout:SfPopupLayout.PopupView>
+                    <popuplayout:PopupView
+                        AnimationMode="Fade"
+                        HeightRequest="122"
+                        BackgroundColor="Gray"
+                        ShowCloseButton="False"
+                        ShowFooter="False"
+                        ShowHeader="False">
+                        <popuplayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <button:SfButton
+                                        Margin="0,5,0,0"
+                                        BackgroundColor="#333333"
+                                        Clicked="AddBtnClicked"
+                                        CornerRadius="15"
+                                        HorizontalOptions="Center"
+                                        Text="Add File" />
+
+                                    <button:SfButton
+                                        BackgroundColor="#333333"
+                                        CornerRadius="15"
+                                        HorizontalOptions="Center"
+                                        Text="Add Folder" />
+
+                                    <button:SfButton
+                                        BackgroundColor="#333333"
+                                        CornerRadius="15"
+                                        HorizontalOptions="Center"
+                                        Text="Add Apk" />
+
+                                </StackLayout>
+
+                            </DataTemplate>
+                        </popuplayout:PopupView.ContentTemplate>
+                    </popuplayout:PopupView>
+                </popuplayout:SfPopupLayout.PopupView>
+            </popuplayout:SfPopupLayout>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Editor x:Name="Lbl" HorizontalOptions="FillAndExpand" />
+            <listview:SfListView
+                x:Name="FolderView"
+                AllowSwiping="True"
+                AutoFitMode="DynamicHeight"
+                SwipeEnded="FolderView_SwipeEnded"
+                AllowKeyboardNavigation="True"
+                DragStartMode="OnHold"
+                VerticalOptions="FillAndExpand">
+                <listview:SfListView.DragDropController>
+                    <listview:DragDropController UpdateSource="True" />
+                </listview:SfListView.DragDropController>
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Fill" Orientation="Horizontal" >
+                            <Image Margin="10" Source="{Binding Image}" />
+                            <Label
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding Name}"
+                                VerticalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+                <listview:SfListView.LeftSwipeTemplate>
+                    <DataTemplate>
+                        <Label BackgroundColor="Red"
+                               Text="𝙓"
+                               FontSize="30"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"/>
+                    </DataTemplate>
+                </listview:SfListView.LeftSwipeTemplate>
+            </listview:SfListView>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <button:SfButton
+                    x:Name="AddBtn"
+                    BackgroundColor="#333333"
+                    BorderColor="White"
+                    BorderWidth="1"
+                    Clicked="CircleButton_Clicked"
+                    CornerRadius="25"
+                    FontSize="{OnPlatform Default=20, UWP=30}"
+                    HeightRequest="50"
+                    HorizontalOptions="Start"
+                    Text="✦"
+                    TextColor="White"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    WidthRequest="50" />
+
+                <Label HorizontalOptions="FillAndExpand" />
+
+                <button:SfButton
+                    BackgroundColor="#333333"
+                    BorderColor="White"
+                    BorderWidth="1"
+                    Clicked="NextButton_Clicked"
+                    CornerRadius="25"
+                    FontSize="20"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    Text="➤"
+                    TextColor="White"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    WidthRequest="50" />
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

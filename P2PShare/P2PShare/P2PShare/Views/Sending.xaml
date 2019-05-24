@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="P2PShare.Sending"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:classes="clr-namespace:P2PShare.Classes">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Styles/DarkStyle.css" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <StackLayout Orientation="Horizontal" >
+                <Editor x:Name="MessageEditor" HorizontalOptions="FillAndExpand" />
+                <Button
+                    x:Name="SendBtn"
+                    Clicked="SendBtn_Clicked"
+                    Text="Send" />
+            </StackLayout>
+            <RelativeLayout>
+                <listview:SfListView
+                    x:Name="FileList"
+                    AllowKeyboardNavigation="True"
+                    AutoFitMode="DynamicHeight"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Factor=0.67, Property=Height, Type=RelativeToParent, Constant=0}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Factor=1, Property=Width, Type=RelativeToParent, Constant=0}">
+                    <listview:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                Margin="10"
+                                HorizontalOptions="FillAndExpand"
+                                Orientation="Vertical">
+                                <Label Text="{Binding Name}" />
+                                <progressBar:SfLinearProgressBar
+                                    ValueChanged="SfLinearProgressBar_PropertyChanged"
+                                    Progress="{Binding Progress,UpdateSourceEventName=PropertyChanged}"
+                                    Maximum="1"
+                                    BackgroundColor="#181818"
+                                    HeightRequest="10"
+                                    ProgressColor="#990099" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </listview:SfListView.ItemTemplate>
+                </listview:SfListView>
+                <chart:SfChart
+                    Margin="10"
+                    BackgroundColor="Black"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Factor=0.33, Property=Height, Type=RelativeToParent, Constant=0}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Factor=1, Property=Width, Type=RelativeToParent, Constant=0}"
+                    RelativeLayout.YConstraint="{ConstraintExpression ElementName=FileList, Constant=0, Factor=1, Property=Height, Type=RelativeToView}" >
+
+                    <chart:SfChart.PrimaryAxis>
+                        <chart:NumericalAxis>
+                            <chart:NumericalAxis.Title >
+                                <chart:ChartAxisTitle Text="Time (s)" TextColor="White"/>
+                            </chart:NumericalAxis.Title>
+                            <chart:NumericalAxis.LabelStyle>
+                                <chart:ChartAxisLabelStyle TextColor="White"/>
+                            </chart:NumericalAxis.LabelStyle>
+                            <chart:NumericalAxis.AxisLineStyle>
+                                <chart:ChartLineStyle StrokeColor="#1A1A1A"/>
+                            </chart:NumericalAxis.AxisLineStyle>
+                            <chart:NumericalAxis.MajorGridLineStyle>
+                                <chart:ChartLineStyle StrokeColor="#1A1A1A"/>
+                            </chart:NumericalAxis.MajorGridLineStyle>
+                        </chart:NumericalAxis>
+                    </chart:SfChart.PrimaryAxis>
+
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis>
+                            <chart:NumericalAxis.Title>
+                                <chart:ChartAxisTitle Text="Speed (Ko/s)" TextColor="White"/>
+                            </chart:NumericalAxis.Title>
+                            <chart:NumericalAxis.LabelStyle>
+                                <chart:ChartAxisLabelStyle TextColor="White"/>
+                            </chart:NumericalAxis.LabelStyle>
+                            <chart:NumericalAxis.AxisLineStyle>
+                                <chart:ChartLineStyle StrokeColor="#1A1A1A"/>
+                            </chart:NumericalAxis.AxisLineStyle>
+                            <chart:NumericalAxis.MajorGridLineStyle>
+                                <chart:ChartLineStyle StrokeColor="#1A1A1A"/>
+                            </chart:NumericalAxis.MajorGridLineStyle>
+                        </chart:NumericalAxis>
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:SplineAreaSeries x:Name="InstantSpeed" XBindingPath="XValue" YBindingPath="YValue" Color="#FB2F2F" Opacity=".4" SplineType="Monotonic"/>
+                    <chart:SplineAreaSeries x:Name="AverageSpeed" XBindingPath="XValue" YBindingPath="YValue" Color="#00A0A0" Opacity=".5" EnableDataPointSelection="True" EnableTooltip="True" ShowTrackballInfo="True" SplineType="Monotonic" />
+
+                </chart:SfChart>
+            </RelativeLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

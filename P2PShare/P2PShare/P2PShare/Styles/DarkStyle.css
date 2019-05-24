@@ -1,0 +1,17 @@
+﻿button {
+    background-color: dimgray;
+    color: azure;
+}
+^ContentPage {
+    background-color: black;
+}
+#Master {
+    background-color: #111111;
+}
+label {
+    color: azure;
+}
+editor {
+    color: azure;
+    background-color: transparent;
+}

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="P2PShare.Send"
+             Title="Send">
+    
+    <ContentPage.Resources>
+        <StyleSheet Source="../Styles/DarkStyle.css"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Editor x:Name="Lbl" HorizontalOptions="FillAndExpand" Margin="10,10,10,0" />
+            <ScrollView VerticalOptions="FillAndExpand" Margin="10">
+                <ListView x:Name="LstView" RowHeight="55">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="10,10,10,10">
+                                    <Image Source="{Binding ImageSource}" Margin="10,0,10,0" />
+                                    <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" Margin="0,0,20,0" />
+                                    <Label Text="{Binding ID}" VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+            <Button x:Name="FindBtn" Text="Find" Clicked="FindBtnClicked" HorizontalOptions="CenterAndExpand" VerticalOptions="End" WidthRequest="10000" Margin="10,0"/>
+            <Button x:Name="ConnectBtn" Text="Connect" Clicked="ConnecBtnClicked" HorizontalOptions="CenterAndExpand" VerticalOptions="End" WidthRequest="10000" Margin="10,0,10,10"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
