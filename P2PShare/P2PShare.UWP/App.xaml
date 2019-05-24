@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="P2PShare.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:P2PShare.UWP"
+    RequestedTheme="Light">
+
+</Application>
